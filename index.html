@@ -195,12 +195,16 @@
             bird.image = birdTopImage;
         }
         if (game == "end") {
+            if(event.offsetX>110 && event.offsetX<400 && event.offsetY>355 && event.offsetY<405){
             score.value = 0;
             arrPipes = [];
             addArrPipes();
             bird.speed = 0;
             bird.cY = 300;
+            gameOver=false;
             game = "start"
+            }
+            
         }
     }
 
@@ -238,10 +242,19 @@
             ctx.fillStyle = "#FFFF00"
             ctx.shadowBlur = 10;
             ctx.fontWeight = 900;
-            ctx.fillText("Your score: " + score.value, 110, 280);
-            ctx.strokeText("Your score: " + score.value, 110, 280);
-            ctx.fillText("GAME OVER", 100, 350);
-            ctx.strokeText("GAME OVER", 100, 350);
+            ctx.fillText("Your score: " + score.value, 110, 200);
+            ctx.strokeText("Your score: " + score.value, 110, 200);
+            ctx.fillText("GAME OVER", 100, 250);
+            ctx.strokeText("GAME OVER", 100, 250);
+            ctx.fillStyle = "black"
+            ctx.strokeText("PLAY AGAIN", 110, 400);
+            ctx.fillText("PLAY AGAIN", 110, 400);
+            ctx.strokeRect(110,355,300,50);
+
+            ctx.font = '20px Arial';
+            ctx.fillStyle = "black"
+            ctx.strokeText("click here", 210, 350);
+            ctx.fillText("click here", 210, 350);
         }
 
         bird.draw();
@@ -288,9 +301,9 @@
     }
 
     function animate() {
-        if (!gameOver) {
+        //if (!gameOver) {
             setTimeout(animate, 1000 / 60);
-        }
+        // }
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         draw();
         update();
